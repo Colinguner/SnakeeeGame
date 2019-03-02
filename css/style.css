@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Press Start 2P', cursive; */
+    color: white;
+    overflow: hidden;
+    min-height: 500px;
+    min-width: 300px;
+    /* background: linear-gradient(#5C258D, #4389A2); */
+    background: linear-gradient(#29024b, #00a7e3);
+}
+
+.canvasGame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+
+canvas {
+    background-color: black;
+    border: 1px white solid;
+    margin-bottom: 1rem;
+}
+
+
+/* ___________________TEXT______________________ */
+p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+/* ___________________TEXT______________________ */
+
+#smallScreenScore {
+    width: 100%;
+    text-align: center;
+}
+
+/* ____________________ICONS__________________ */
+i {
+    font-size: 3rem;
+    margin: 0.5rem;
+}
+
+#pause {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0.5rem 0.5rem 0 0;
+}
+
+#play {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0.5rem 0.5rem 0 0;
+    display: none;
+}
+
+/* ____________________ICONS__________________ */
+
+@media(max-width: 700px) {
+    canvas {
+        background-color: black;
+        border: 1px white solid;
+        height: 400px;
+        width: 300px;
+    }
+}
+
+@media (max-height: 665px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin: 3px 0;
+    }
+
+    i {
+        margin: 1px;
+    }
+
+    canvas {
+        margin-bottom: 3px;
+    }
+}
