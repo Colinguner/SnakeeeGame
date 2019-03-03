@@ -85,12 +85,11 @@ i {
 
 @media(max-width: 700px) {
     canvas {
-        background-color: black;
-        border: 1px white solid;
         height: 400px;
         width: 300px;
     }
 }
+
 
 @media (max-height: 665px) {
     h1 {
@@ -108,5 +107,12 @@ i {
 
     canvas {
         margin-bottom: 3px;
+    }
+}
+@media(max-height: 569px) {
+    canvas {
+        height: 300px;
+        width: 290px;
+        margin: 0.5rem 0;
     }
 }
