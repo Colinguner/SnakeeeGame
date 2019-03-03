@@ -1,7 +1,7 @@
   // _______________________Variables_________________
   var fruitOnScreen = false;
   var gameLost = false;
-  var direction = "right"; 
+  var direction = "right";
   var snake = [];
   var fruit = undefined;
   var ate = false; //if fruit was eaten
@@ -11,6 +11,7 @@
   var ctx = document.getElementById('canvas').getContext("2d");
   var gamePaused = false;
   var playingGame; //itervalID
+  var fruitPrintedOnSnake = false; //if fruit appear on snake it will get painted to green/black and disapear
   var loseSound = new Audio("sounds/lose.wav");
   let eat = new Audio("sounds/eat.wav");
   let pik = new Audio("sounds/pik.wav");
@@ -36,8 +37,8 @@
     document.getElementById("canvas").setAttribute("height", "400");
     document.getElementById("canvas").setAttribute("width", "300");
     document.getElementById("smallScreenScore").style.display = 'block';
-    
-    if(h<=570) {
+
+    if (h <= 570) {
       document.getElementById("canvas").setAttribute("height", "300");
       document.getElementById("canvas").setAttribute("width", "290");
     }
@@ -48,22 +49,22 @@
       });
     }
     upKey.addEventListener("click", function () {
-      if(direction !== "down"){
-            direction = "up";
+      if (direction !== "down") {
+        direction = "up";
       }
     });
     downKey.addEventListener("click", function () {
-      if(direction !== "up"){
-      direction = "down";
+      if (direction !== "up") {
+        direction = "down";
       }
     });
     leftKey.addEventListener("click", function () {
-      if(direction !== "right"){
-          direction = "left";
+      if (direction !== "right") {
+        direction = "left";
       }
     });
     rightKey.addEventListener("click", function () {
-      if(direction !== "left"){
+      if (direction !== "left") {
         direction = "right";
       }
     });
@@ -179,8 +180,20 @@
       x: randomX / 10,
       y: randomY / 10
     };
-    ctx.fillStyle = "red";
-    ctx.fillRect(randomX, randomY, 10, 10);
+
+    for(let i= 0; i<snake.length; i++){
+      if(fruit.x === snake[i].x && fruit.y === snake[i].y){
+        fruitPrintedOnSnake = true;
+      }
+    }
+
+    if(fruitPrintedOnSnake === false){
+        ctx.fillStyle = "red";
+        ctx.fillRect(randomX, randomY, 10, 10);
+    }else{
+      fruitPrintedOnSnake = false;
+      drawFruit();
+    }
   }
 
   function scoreChange() {
@@ -199,7 +212,8 @@
     setTimeout(function () {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      drawFruit();}, 80);
+      drawFruit();
+    }, 80);
     //restarting game
     snake = [];
     for (let i = 3; i >= 0; i--) {
