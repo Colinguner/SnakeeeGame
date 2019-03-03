@@ -39,7 +39,7 @@
     
     if(h<=570) {
       document.getElementById("canvas").setAttribute("height", "300");
-      document.getElementById("canvas").setAttribute("width", "300");
+      document.getElementById("canvas").setAttribute("width", "290");
     }
     //___________EventListeners Arrows_______________________
     for (let i = 0; i < 6; i++) {
