@@ -7,6 +7,7 @@
   var ate = false; //if fruit was eaten
   let score = document.querySelector(".score");
   var w = screen.width;
+  var h = screen.height;
   var ctx = document.getElementById('canvas').getContext("2d");
   var gamePaused = false;
   var playingGame; //itervalID
@@ -35,6 +36,11 @@
     document.getElementById("canvas").setAttribute("height", "400");
     document.getElementById("canvas").setAttribute("width", "300");
     document.getElementById("smallScreenScore").style.display = 'block';
+    
+    if(h<=570) {
+      document.getElementById("canvas").setAttribute("height", "300");
+      document.getElementById("canvas").setAttribute("width", "300");
+    }
     //___________EventListeners Arrows_______________________
     for (let i = 0; i < 6; i++) {
       arrows[i].addEventListener("click", function () {
