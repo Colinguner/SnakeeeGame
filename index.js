@@ -24,6 +24,23 @@
   const pauseButton = document.getElementById("pause");
   const playButton = document.getElementById("play");
   // _______________________Variables_________________
+  //___________Play/Pause_______________________
+  pauseButton.addEventListener("click", function () {
+    console.log("pauza");
+    document.getElementById("pause").style.display = 'none';
+    document.getElementById("play").style.display = 'block';
+    gamePaused = true;
+    console.log("gamePaused: " + gamePaused);
+    clearInterval(playingGame)
+  });
+  playButton.addEventListener("click", function () {
+    console.log("start");
+    document.getElementById("pause").style.display = 'block';
+    document.getElementById("play").style.display = 'none';
+    gamePaused = false;
+    console.log(gamePaused);
+    playingGame = setInterval(playing, 160);
+  });
   //crating starting snake
   for (let i = 3; i >= 0; i--) {
     snake.push({
@@ -31,7 +48,7 @@
       y: 5
     });
   }
-
+  
   if (w <= 700) {
     // __________Changing layout_________________________
     document.getElementById("canvas").setAttribute("height", "400");
@@ -68,23 +85,7 @@
         direction = "right";
       }
     });
-    //___________Play/Pause_______________________
-    pauseButton.addEventListener("click", function () {
-      console.log("pauza");
-      document.getElementById("pause").style.display = 'none';
-      document.getElementById("play").style.display = 'block';
-      gamePaused = true;
-      console.log("gamePaused: " + gamePaused);
-      clearInterval(playingGame)
-    });
-    playButton.addEventListener("click", function () {
-      console.log("start");
-      document.getElementById("pause").style.display = 'block';
-      document.getElementById("play").style.display = 'none';
-      gamePaused = false;
-      console.log(gamePaused);
-      playingGame = setInterval(playing, 160);
-    });
+
     playingGame = setInterval(playing, 160);
     drawFruit();
   } else {
@@ -94,6 +95,34 @@
     // __________Changing layout_________________________
     // cvsW = canvas.width;
     // cvsH = canvas.height;
+    document.onkeydown = function () {
+      let arrow = event.keyCode || event.which;
+      switch (arrow) {
+        case 37:
+          if(direction !== "right"){
+            direction = "left";
+          }
+          break;
+        case 38:
+        if(direction !== "down"){
+            direction = "up";
+        }
+          break;
+        case 39:
+        if(direction !== "left"){
+            direction = "right";
+        } 
+          break;
+        case 40:
+        if(direction !== "up"){
+            direction = "down";
+        }
+          break;
+        default:
+          console.log("yy????");
+      }
+    }
+    playingGame = setInterval(playing, 100);
     drawFruit();
   }
   // ________________________FUNCTIONS_______________________________
@@ -148,12 +177,10 @@
     }
     if (ate === true) {
       scoreChange();
-      // eatSound();
       eat.play();
       drawFruit();
       ate = false;
     }
-    // _____________________fruit_______________
     //drawing everything
     draw();
   }
@@ -181,20 +208,21 @@
       y: randomY / 10
     };
 
-    for(let i= 0; i<snake.length; i++){
-      if(fruit.x === snake[i].x && fruit.y === snake[i].y){
+    for (let i = 0; i < snake.length; i++) {
+      if (fruit.x === snake[i].x && fruit.y === snake[i].y) {
         fruitPrintedOnSnake = true;
       }
     }
 
-    if(fruitPrintedOnSnake === false){
-        ctx.fillStyle = "red";
-        ctx.fillRect(randomX, randomY, 10, 10);
-    }else{
+    if (fruitPrintedOnSnake === false) {
+      ctx.fillStyle = "red";
+      ctx.fillRect(randomX, randomY, 10, 10);
+    } else {
       fruitPrintedOnSnake = false;
       drawFruit();
     }
   }
+  //______________________DRAWING________________
 
   function scoreChange() {
     score.innerHTML = Number(score.innerHTML) + 1;
@@ -202,7 +230,6 @@
       score.innerHTML = "0";
     }
   }
-  //______________________DRAWING________________
 
   function gameLostFunction() {
     //red screen flash on lose
